@@ -1,24 +1,16 @@
 
-function inicia_com(palavra::String, inicio::String)::Bool
-    return length(palavra) > length(inicio) && palavra[begin:length(inicio)] == inicio
-end
-
-function termina_com(palavra::String, fim::String)::Bool
-    return length(palavra) > length(fim) && palavra[end-(length(fim)-1):end] == fim
-end
-
-function inicia_com(palavra::String, inicio::Array{String})::Bool
+function inicia_com(palavra::AbstractString, inicio::Array{String})::Bool
 	for i in inicio
-		if inicia_com(palavra, i)
+		if startswith(palavra, i)
 			return true
 		end
 	end
 	return false
 end
 
-function termina_com(palavra::String, fim::Array{String})::Bool
+function termina_com(palavra::AbstractString, fim::Array{String})::Bool
 	for i in fim
-		if termina_com(palavra, i)
+		if endswith(palavra, i)
 			return true
 		end
 	end
@@ -171,39 +163,39 @@ const LISTA_LOCUCOES_ADVERBIAIS = [
 	"à tardinha", "de dia", "de manhã", "de noite", "em breve", "pela manhã"
 ]
 
-function eh_substantivo(palavra::String)::Bool
+function eh_substantivo(palavra::AbstractString)::Bool
 	return termina_com(palavra, LISTA_SUFIXOS_SUBSTANTIVOS)
 end
 
-function eh_adjetivo(palavra::String)::Bool
+function eh_adjetivo(palavra::AbstractString)::Bool
 	return termina_com(palavra, LISTA_SUFIXOS_ADJETIVOS)
 end
 
-function eh_verbo(palavra::String)::Bool
+function eh_verbo(palavra::AbstractString)::Bool
 	return termina_com(palavra, LISTA_SUFIXOS_VERBO) || termina_com(palavra, LISTA_SUFIXOS_VERBOS_CONJUGADOS)
 end
 
-function eh_adverbio(palavra::String)::Bool
+function eh_adverbio(palavra::AbstractString)::Bool
 	return in(palavra, LISTA_ADVERBIOS) || termina_com(palavra, "mente")
 end
 
-function eh_preposicao(palavra::String)::Bool
+function eh_preposicao(palavra::AbstractString)::Bool
 	return in(palavra, LISTA_PREPOSICOES)
 end
 
-function eh_artigo(palavra::String)::Bool
+function eh_artigo(palavra::AbstractString)::Bool
 	return in(palavra, LISTA_ARTIGOS)
 end
 
-function eh_artigo_contraido(palavra::String)::Bool
+function eh_artigo_contraido(palavra::AbstractString)::Bool
 	return in(palavra, LISTA_ARTIGOS_CONTRAIDOS)
 end
 
-function eh_numeral(palavra::String)::Bool
+function eh_numeral(palavra::AbstractString)::Bool
 	return in(palavra, LISTA_NUMERAIS)
 end
 
-function eh_nome(palavra::String)::Bool
+function eh_nome(palavra::AbstractString)::Bool
 	return eh_substantivo(palavra) || eh_adjetivo(palavra)
 end
 

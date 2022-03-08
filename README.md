@@ -1,2 +1,2 @@
-# lincom
-Estudo de Linguística Computacional
+# Lincom
+Um repositório para estudo de Linguística Computacional.

@@ -1,7 +1,7 @@
 
 function inicia_com(palavra::AbstractString, inicio::Array{String})::Bool
 	for i in inicio
-		if startswith(palavra, i)
+		if (length(palavra) - length(i)) > 1 && startswith(palavra, i)
 			return true
 		end
 	end
@@ -10,7 +10,7 @@ end
 
 function termina_com(palavra::AbstractString, fim::Array{String})::Bool
 	for i in fim
-		if endswith(palavra, i)
+		if (length(palavra) - length(i)) > 1 && endswith(palavra, i)
 			return true
 		end
 	end
